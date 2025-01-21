@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Teacher Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .messages-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .message-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .message-list th,
+        .message-list td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .message-list th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .message-list td {
+            background-color: #ecf0f1;
+        }
+
+        .message-card {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .send-message-button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .send-message-button:hover {
+            background-color: #27ae60;
+        }
+
+        .message-details {
+            margin-top: 20px;
+        }
+
+        .message-details h4 {
+            margin-bottom: 10px;
+        }
+
+        .message-details p {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="C:/Users/satya/Desktop/abc.jpg" alt="Teacher Profile" class="profile-pic">
+                <h3>SATYAM SINGH</h3>
+                <p>Computer Programmer and Math Teacher</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="teacher-dashboard.html">Home Page</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="grades.html">Grades</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="messages.html">Messages</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Messages</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Message List -->
+            <div class="messages-container">
+                <h2>Inbox</h2>
+                <table class="message-list">
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Messages will be dynamically added here -->
+                    </tbody>
+                </table>
+
+                <!-- Send Message Button -->
+                <button class="send-message-button" onclick="openMessageModal()">Send New Message</button>
+            </div>
+
+            <!-- Message Details (only shown when a message is clicked) -->
+            <div class="message-details" id="message-details" style="display: none;">
+                <h4 id="message-subject"></h4>
+                <p id="message-content"></p>
+                <button class="send-message-button" onclick="backToInbox()">Back to Inbox</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            { from: "Student1", subject: "Assignment Question", date: "2025-01-10", content: "Can you please clarify question 3 on the assignment?" },
+            { from: "Student2", subject: "Class Reschedule", date: "2025-01-12", content: "The class on Monday is rescheduled to Wednesday." },
+        ];
+
+        // Render messages in inbox
+        function renderMessages() {
+            const tbody = document.querySelector('.message-list tbody');
+            tbody.innerHTML = '';
+
+            messages.forEach((message, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${message.from}</td>
+                    <td>${message.subject}</td>
+                    <td>${message.date}</td>
+                    <td><button onclick="viewMessage(${index})">View</button></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // View a specific message
+        function viewMessage(index) {
+            const message = messages[index];
+            document.getElementById('message-subject').textContent = message.subject;
+            document.getElementById('message-content').textContent = message.content;
+
+            // Hide inbox and show message details
+            document.querySelector('.messages-container').style.display = 'none';
+            document.getElementById('message-details').style.display = 'block';
+        }
+
+        // Go back to the inbox
+        function backToInbox() {
+            document.querySelector('.messages-container').style.display = 'block';
+            document.getElementById('message-details').style.display = 'none';
+        }
+
+        // Open modal for sending a new message
+        function openMessageModal() {
+            alert('thoda intezar kijiye jaldi milega ye features 😂😂😂😂😂😂😂');
+            // Logic for opening modal to compose and send new message can be added here
+        }
+
+        // Logout functionality
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+
+        // Initial render of messages
+        renderMessages();
+    </script>
+</body>
+</html>

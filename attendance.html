@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Teacher Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .attendance-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .attendance-button:hover {
+            background-color: #2980b9;
+        }
+
+        .filter-section {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .filter-section input {
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .filter-section button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-section button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="C:/Users/satya/Desktop/abc.jpg" alt="Teacher Profile" class="profile-pic">
+                <h3>SATYAM SINGH</h3>
+                <p>Computer Programmer and Math Teacher</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="teacher-dashboard.html">Home Page</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="grades.html">Grades</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="messages.html">Messages</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Attendance</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <input type="date" id="attendance-date" />
+                <button onclick="filterAttendance()">Filter Attendance</button>
+            </div>
+
+            <!-- Attendance Table -->
+            <table id="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Mark Attendance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Student list will be dynamically added here -->
+                </tbody>
+            </table>
+
+            <!-- Bulk Attendance Button -->
+            <button onclick="markBulkAttendance()" class="attendance-button">Mark Attendance for All</button>
+        </div>
+    </div>
+
+    <script>
+        // Example student list
+        const students = [
+            { id: 1, name: "Harish" },
+            { id: 2, name: "Ajit" },
+            { id: 3, name: "Mohasin" },
+            { id: 4, name: "Priya" },
+            { id: 5, name: "Prashant"}
+        ];
+
+        let attendanceRecords = [];
+
+        // Render attendance table
+        function renderAttendanceTable() {
+            const tableBody = document.getElementById('attendance-table').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Clear the existing table rows
+
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td>
+                        <select id="attendance-${student.id}">
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                            <option value="late">Late</option>
+                        </select>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to mark attendance for all students at once
+        function markBulkAttendance() {
+            students.forEach(student => {
+                const attendanceStatus = document.getElementById(`attendance-${student.id}`).value;
+                attendanceRecords.push({ studentId: student.id, status: attendanceStatus });
+            });
+            alert("Attendance for all students has been marked!");
+        }
+
+        // Function to filter attendance by date (additional feature)
+        function filterAttendance() {
+            const filterDate = document.getElementById('attendance-date').value;
+            alert(`Attendance filtered for date: ${filterDate}`);
+            // Logic for filtering attendance data based on date can be added here
+        }
+
+        // Logout functionality
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+
+        // Initial render of attendance table
+        renderAttendanceTable();
+    </script>
+</body>
+</html>

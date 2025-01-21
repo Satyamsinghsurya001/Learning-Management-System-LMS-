@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications</title>
+  <link rel="stylesheet" href="student-dash-common.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="navbar">
+      <h1>Notifications</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="student-DashBoard.html">Dashboard HOME</a>
+      <a href="student-dash-profile.html">Profile</a>
+      <a href="student-dash-dashboard.html">Dashboard</a>
+      <a href="student-dash-courses.html">Courses</a>
+      <a href="student-dash-assignments.html">Assignments</a>
+      <a href="student-dash-grades.html">Grades</a>
+      <a href="student-dash-notifications.html">Notifications</a>
+      <a href="student-dash-support.html">Support</a>
+    </div>
+ 
+    <div class="main-content">
+      <h1>Recent Notifications</h1>
+      <ul id="notifications-list">
+        <!-- Notifications will be dynamically loaded -->
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const notifications = [
+      { date: "2025-01-15", message: "Assignment 1 has been graded." },
+      { date: "2025-01-18", message: "New course material added for Web Development." },
+      { date: "2025-01-19", message: "Your profile has been updated." }
+    ];
+
+    const notificationsList = document.getElementById('notifications-list');
+    notifications.forEach(notification => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `<strong>${notification.date}</strong>: ${notification.message}`;
+      notificationsList.appendChild(listItem);
+    });
+
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "student-login.html";
+    }
+  </script>
+</body>
+</html>

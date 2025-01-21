@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="student-dash-common.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="navbar">
+      <h1>Profile</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="student-DashBoard.html">Dashboard HOME</a>
+      <a href="student-dash-profile.html">Profile</a>
+      <a href="student-dash-dashboard.html">Dashboard</a>
+      <a href="student-dash-courses.html">Courses</a>
+      <a href="student-dash-assignments.html">Assignments</a>
+      <a href="student-dash-grades.html">Grades</a>
+      <a href="student-dash-notifications.html">Notifications</a>
+      <a href="student-dash-support.html">Support</a>
+    </div>
+    
+    <div class="main-content">
+      <h1>Your Profile</h1>
+      <p><b>Name:</b> Satyam SIngh Suryavanshi</p>
+      <p><b>Email:</b> satyamsingh27315@gmail.com</p>
+      <p><b>Enrolled Course:</b> MCA (Master Of Computer Applications)</p>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "student-login.html";
+    }
+  </script>
+</body>
+</html>

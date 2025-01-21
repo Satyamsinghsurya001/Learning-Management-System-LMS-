@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grades</title>
+  <link rel="stylesheet" href="student-dash-common.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="navbar">
+      <h1>Grades</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+    <div class="sidebar">
+      <a href="student-DashBoard.html">Dashboard HOME</a>
+      <a href="student-dash-profile.html">Profile</a>
+      <a href="student-dash-dashboard.html">Dashboard</a>
+      <a href="student-dash-courses.html">Courses</a>
+      <a href="student-dash-assignments.html">Assignments</a>
+      <a href="student-dash-grades.html">Grades</a>
+      <a href="student-dash-notifications.html">Notifications</a>
+      <a href="student-dash-support.html">Support</a>
+    </div>
+    
+    <div class="main-content">
+      <h1>Your Grades</h1>
+      <table border="1" cellpadding="10">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Web Development</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>Database Management</td>
+            <td>B+</td>
+          </tr>
+          <tr>
+            <td>Python Programming</td>
+            <td>A-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "student-login.html";
+    }
+  </script>
+</body>
+</html>

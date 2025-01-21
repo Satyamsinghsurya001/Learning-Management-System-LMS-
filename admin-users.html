@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+        }
+        .container {
+            display: flex;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #34495e;
+            padding: 20px;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 15px 0;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+
+        /* User Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #3498db;
+            color: white;
+        }
+        table td button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        table td button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Add User Button */
+        .add-user-btn {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .add-user-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                    <li><a href="admin-courses.html">Course Management</a></li>
+                    <li><a href="admin-reports.html">Reports</a></li>
+                    <li><a href="admin-settings.html">Settings</a></li>
+                    <li><a href="index.html">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>User Management</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- User List Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Harish</td>
+                        <td>harish@gmail.com</td>
+                        <td>Student</td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>mohasin</td>
+                        <td>mohasin@gmail.com</td>
+                        <td>Teacher</td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Ajit</td>
+                        <td>ajit@gmail.com</td>
+                        <td>Teacher</td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Prashant</td>
+                        <td>Prashant@gmail.com</td>
+                        <td>student</td>
+                        <td><button>Delete</button></td>
+                    </tr>
+                    <!-- Add more rows here -->
+                </tbody>
+            </table>
+
+            <!-- Add New User Button -->
+            <button class="add-user-btn" onclick="window.location='admin-users.html'">Add New User</button>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

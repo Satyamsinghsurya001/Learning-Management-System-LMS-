@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses</title>
+  <link rel="stylesheet" href="student-dash-common.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="navbar">
+      <h1>Courses</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+      <a href="student-DashBoard.html">Dashboard HOME</a>
+      <a href="student-dash-profile.html">Profile</a>
+      <a href="student-dash-dashboard.html">Dashboard</a>
+      <a href="student-dash-courses.html">Courses</a>
+      <a href="student-dash-assignments.html">Assignments</a>
+      <a href="student-dash-grades.html">Grades</a>
+      <a href="student-dash-notifications.html">Notifications</a>
+      <a href="student-dash-support.html">Support</a>
+    </div>
+    
+
+    <div class="main-content">
+      <h1>My Courses</h1>
+      <div class="grid-container" id="courses-container">
+        <!-- Dynamically loaded course cards -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "student-login.html";
+    }
+  </script>
+</body>
+</html>

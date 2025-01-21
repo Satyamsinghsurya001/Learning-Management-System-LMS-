@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Teacher Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 500px;
+        }
+
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .modal-content button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #2980b9;
+        }
+
+        .course-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .course-actions button {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .course-actions button:hover {
+            background-color: #c0392b;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="C:/Users/satya/Desktop/abc.jpg" alt="Teacher Profile" class="profile-pic">
+                <h3>SATYAM SINGH</h3>
+                <p>Computer Programmer and Math Teacher</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="teacher-dashboard.html">Home Page</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="grades.html">Grades</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="messages.html">Messages</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Courses</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Add Course Button -->
+            <button onclick="openModal('add')">Add New Course</button>
+
+            <!-- Course List -->
+            <div class="dashboard-cards" id="course-list">
+                <!-- Courses will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div class="modal" id="course-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Add New Course</h2>
+            <form id="course-form">
+                <input type="text" id="course-name" placeholder="Course Name" required>
+                <textarea id="course-description" placeholder="Course Description" rows="4" required></textarea>
+                <button type="submit" id="modal-submit">Save Course</button>
+                <button type="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const courses = []; // Array to store courses
+
+        // Function to open modal for adding or editing courses
+        function openModal(action, courseIndex) {
+            const modal = document.getElementById('course-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const submitButton = document.getElementById('modal-submit');
+            const courseName = document.getElementById('course-name');
+            const courseDescription = document.getElementById('course-description');
+            
+            if (action === 'edit') {
+                const course = courses[courseIndex];
+                courseName.value = course.name;
+                courseDescription.value = course.description;
+                modalTitle.textContent = 'Edit Course';
+                submitButton.textContent = 'Update Course';
+                submitButton.onclick = function() {
+                    updateCourse(courseIndex);
+                };
+            } else {
+                courseName.value = '';
+                courseDescription.value = '';
+                modalTitle.textContent = 'Add New Course';
+                submitButton.textContent = 'Save Course';
+                submitButton.onclick = addCourse;
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        // Function to close modal
+        function closeModal() {
+            document.getElementById('course-modal').style.display = 'none';
+        }
+
+        // Function to add a new course
+        function addCourse(event) {
+            event.preventDefault();
+            const courseName = document.getElementById('course-name').value;
+            const courseDescription = document.getElementById('course-description').value;
+
+            const newCourse = {
+                name: courseName,
+                description: courseDescription,
+            };
+            courses.push(newCourse);
+            renderCourses();
+            closeModal();
+        }
+
+        // Function to update an existing course
+        function updateCourse(courseIndex) {
+            const courseName = document.getElementById('course-name').value;
+            const courseDescription = document.getElementById('course-description').value;
+
+            courses[courseIndex] = {
+                name: courseName,
+                description: courseDescription,
+            };
+            renderCourses();
+            closeModal();
+        }
+
+        // Function to delete a course
+        function deleteCourse(courseIndex) {
+            courses.splice(courseIndex, 1);
+            renderCourses();
+        }
+
+        // Function to render course list dynamically
+        function renderCourses() {
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = ''; // Clear current course list
+            courses.forEach((course, index) => {
+                const courseCard = document.createElement('div');
+                courseCard.classList.add('card');
+                courseCard.innerHTML = `
+                    <h2>${course.name}</h2>
+                    <p>${course.description}</p>
+                    <div class="course-actions">
+                        <button onclick="openModal('edit', ${index})">Edit</button>
+                        <button onclick="deleteCourse(${index})">Delete</button>
+                    </div>
+                `;
+                courseList.appendChild(courseCard);
+            });
+        }
+
+        // Logout functionality
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+
+        // Initial render of courses (if any)
+        renderCourses();
+    </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments - Teacher Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .assignment-list {
+            margin-top: 20px;
+        }
+
+        .assignment-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .assignment-card h3 {
+            margin-top: 0;
+        }
+
+        .assignment-card button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .assignment-card button:hover {
+            background-color: #2980b9;
+        }
+
+        .assignment-card .delete-button {
+            background-color: #e74c3c;
+        }
+
+        .assignment-card .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .add-assignment-button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .add-assignment-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="C:/Users/satya/Desktop/abc.jpg" alt="Teacher Profile" class="profile-pic">
+                <h3>SATYAM SINGH</h3>
+                <p>Computer Programmer and Math Teacher</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="teacher-dashboard.html">Home Page</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="grades.html">Grades</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="messages.html">Messages</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Assignments</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Add Assignment Button -->
+            <button class="add-assignment-button" onclick="openAssignmentModal('add')">Add New Assignment</button>
+
+            <!-- Assignment List -->
+            <div class="assignment-list" id="assignment-list">
+                <!-- List of assignments will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example assignment data
+        const assignments = [
+            { id: 1, title: "Math Homework 1", description: "Solve algebra problems", dueDate: "2025-02-15", submissions: 10 },
+            { id: 2, title: "Science Project", description: "Create a science project", dueDate: "2025-03-01", submissions: 8 },
+            { id: 3, title: "History Essay", description: "Write an essay on World War II", dueDate: "2025-02-28", submissions: 12 },
+        ];
+
+        // Function to render assignments list
+        function renderAssignments() {
+            const assignmentListContainer = document.getElementById('assignment-list');
+            assignmentListContainer.innerHTML = ''; // Clear existing assignments
+
+            assignments.forEach(assignment => {
+                const assignmentCard = document.createElement('div');
+                assignmentCard.classList.add('assignment-card');
+                assignmentCard.innerHTML = `
+                    <h3>${assignment.title}</h3>
+                    <p><strong>Description:</strong> ${assignment.description}</p>
+                    <p><strong>Due Date:</strong> ${assignment.dueDate}</p>
+                    <p><strong>Submissions:</strong> ${assignment.submissions}</p>
+                    <button onclick="openAssignmentModal('edit', ${assignment.id})">Edit</button>
+                    <button class="delete-button" onclick="deleteAssignment(${assignment.id})">Delete</button>
+                `;
+                assignmentListContainer.appendChild(assignmentCard);
+            });
+        }
+
+        // Function to open the modal for adding/editing assignments
+        function openAssignmentModal(action, assignmentId = null) {
+            if (action === 'edit' && assignmentId !== null) {
+                const assignment = assignments.find(assignment => assignment.id === assignmentId);
+                alert(`Edit Assignment: ${assignment.title}`);
+                // Logic for editing assignment can be added here
+            } else if (action === 'add') {
+                alert('Add a new assignment');
+                // Logic for adding a new assignment can be added here
+            }
+        }
+
+        // Function to delete an assignment
+        function deleteAssignment(assignmentId) {
+            const assignmentIndex = assignments.findIndex(assignment => assignment.id === assignmentId);
+            if (assignmentIndex !== -1) {
+                assignments.splice(assignmentIndex, 1);
+                renderAssignments(); // Re-render the assignment list
+            }
+        }
+
+        // Logout functionality
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+
+        // Initial render of assignments
+        renderAssignments();
+    </script>
+</body>
+</html>

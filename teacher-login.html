@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Teacher Dashboard</title>
+  
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #7bb6b2, #8684ae);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      width: 100%;
+      margin: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* Left side: Features */
+    .features {
+      flex: 1;
+      background: linear-gradient(135deg, #7bb6b2, #8684ae);
+      color: white;
+      padding: 30px;
+      animation: slideInLeft 1s ease-out;
+    }
+
+    .features h2 {
+      margin-bottom: 20px;
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features ul li {
+      margin-bottom: 15px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    .features ul li span {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+
+    /* Right side: Login form */
+    .login-container {
+      flex: 1;
+      padding: 30px;
+      animation: slideInRight 1s ease-out;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #toggle-password {
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Animations */
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Side: Features -->
+    <div class="features">
+      <h2>Why Use the Teacher Dashboard?</h2>
+      <ul>
+        <li><span>✅</span> Manage your classes and assignments efficiently.</li>
+        <li><span>✅</span> Monitor student progress in real-time.</li>
+        <li><span>✅</span> Upload and share study materials effortlessly.</li>
+        <li><span>✅</span> Generate detailed reports and insights.</li>
+        <li><span>✅</span> Communicate with students seamlessly.</li>
+        <li><span>✅</span> <h4>Default login to view Dashboard use</h4></li>
+        <li><span>✅</span>     #Email = satyam@gmail.com</li>
+        <li><span>✅</span>     #Password = teacher123</li>
+      </ul>
+    </div>
+
+    <!-- Right Side: Login Form -->
+    <div class="login-container">
+      <h1>Login to Teacher Dashboard</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group" style="position: relative;">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <span id="toggle-password">👁️</span>
+        </div>
+        <button type="submit" id="login-button">Login</button>
+      </form>
+      <div class="extra-links">
+        <p>Forgot password? <a href="teacher-forget-pass.html">Click here</a></p>
+        <p>Don't have an account? <a href="teacher-signup.html">Sign Up here</a>.</p>
+        <p>Back to Home Page? <a href="index.html">Click here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Password visibility toggle functionality
+    const passwordInput = document.getElementById("password");
+    const togglePassword = document.getElementById("toggle-password");
+
+    togglePassword.addEventListener("click", () => {
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+      togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+    });
+
+    // Form Validation and Submission
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get user input values
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Basic Validation
+      if (email === "" || password === "") {
+        alert("Please fill in both email and password fields.");
+        return;
+      }
+
+      // Redirect after login (simple validation, replace with actual login logic)
+      if (email === "satyam@gmail.com" && password === "teacher123") {
+        window.location.href = "teacher-dashboard.html"; // Redirect to the teacher dashboard page
+      } else {
+        alert("Invalid login credentials, please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

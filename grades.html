@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grades - Teacher Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .grade-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .grade-button:hover {
+            background-color: #2980b9;
+        }
+
+        .edit-button {
+            background-color: #f39c12;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-button:hover {
+            background-color: #e67e22;
+        }
+
+        .filter-section {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .filter-section input {
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .filter-section button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-section button:hover {
+            background-color: #27ae60;
+        }
+
+        .summary-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile">
+                <img src="C:/Users/satya/Desktop/abc.jpg" alt="Teacher Profile" class="profile-pic">
+                <h3>SATYAM SINGH</h3>
+                <p>Computer Programmer and Math Teacher</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="teacher-dashboard.html">Home Page</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="attendance.html">Attendance</a></li>
+                    <li><a href="grades.html">Grades</a></li>
+                    <li><a href="assignments.html">Assignments</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="messages.html">Messages</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Grades</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <input type="text" id="search-student" placeholder="Search Student by Name" />
+                <button onclick="filterGrades()">Filter Grades</button>
+            </div>
+
+            <!-- Grade Table -->
+            <table id="grades-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Assignment 1</th>
+                        <th>Assignment 2</th>
+                        <th>Final Exam</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Grades list will be dynamically added here -->
+                </tbody>
+            </table>
+
+            <!-- Grade Summary -->
+            <div class="summary-section">
+                <h3>Grade Summary</h3>
+                <p>Total Students: <span id="total-students">0</span></p>
+                <p>Students Passed: <span id="passed-students">0</span></p>
+                <p>Students Failed: <span id="failed-students">0</span></p>
+            </div>
+
+            <!-- Add Grade Button -->
+            <button onclick="openGradeModal('add')" class="grade-button">Add Grades</button>
+        </div>
+    </div>
+
+    <script>
+        // Example student list with grades
+        const students = [
+            { id: 1, name: "Harish", assignments: [85, 90, 88] },
+            { id: 2, name: "Ajit", assignments: [78, 82, 80] },
+            { id: 3, name: "Mohasin", assignments: [92, 88, 90] },
+            { id: 4, name: "Prashant", assignments: [65, 70, 68] },
+            { id: 5, name: "Priya", assignments:[80, 83, 82]}
+        ];
+
+        let gradesRecords = [...students]; // Store the grades data
+
+        // Function to render grades table dynamically
+        function renderGradesTable() {
+            const tableBody = document.getElementById('grades-table').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Clear the current table rows
+
+            gradesRecords.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td><input type="number" value="${student.assignments[0]}" onchange="updateGrade(${student.id}, 0, this.value)" /></td>
+                    <td><input type="number" value="${student.assignments[1]}" onchange="updateGrade(${student.id}, 1, this.value)" /></td>
+                    <td><input type="number" value="${student.assignments[2]}" onchange="updateGrade(${student.id}, 2, this.value)" /></td>
+                    <td>
+                        <button class="edit-button" onclick="openGradeModal('edit', ${student.id})">Edit</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            updateGradeSummary();
+        }
+
+        // Function to update a student's grade
+        function updateGrade(studentId, assignmentIndex, newGrade) {
+            const student = gradesRecords.find(student => student.id === studentId);
+            if (student) {
+                student.assignments[assignmentIndex] = parseInt(newGrade);
+                renderGradesTable();
+            }
+        }
+
+        // Function to open modal for adding/editing grades
+        function openGradeModal(action, studentId = null) {
+            if (action === 'edit' && studentId !== null) {
+                const student = gradesRecords.find(student => student.id === studentId);
+                alert(`Edit Grades for ${student.name}`);
+                // Logic for editing grades can be implemented here
+            } else if (action === 'add') {
+                alert('Add new grades');
+                // Logic for adding grades for a new student can be implemented here
+            }
+        }
+
+        // Function to filter grades based on student name
+        function filterGrades() {
+            const searchQuery = document.getElementById('search-student').value.toLowerCase();
+            gradesRecords = students.filter(student => student.name.toLowerCase().includes(searchQuery));
+            renderGradesTable();
+        }
+
+        // Function to update grade summary
+        function updateGradeSummary() {
+            const totalStudents = gradesRecords.length;
+            const passedStudents = gradesRecords.filter(student => student.assignments.every(grade => grade >= 60)).length;
+            const failedStudents = totalStudents - passedStudents;
+
+            document.getElementById('total-students').textContent = totalStudents;
+            document.getElementById('passed-students').textContent = passedStudents;
+            document.getElementById('failed-students').textContent = failedStudents;
+        }
+
+        // Logout functionality
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html';
+        }
+
+        // Initial render of grades table
+        renderGradesTable();
+    </script>
+</body>
+</html>

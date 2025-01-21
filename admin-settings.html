@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+        }
+        .container {
+            display: flex;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #34495e;
+            padding: 20px;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 15px 0;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+
+        /* Settings Form */
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #27ae60;
+        }
+
+        /* Message Styles */
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #27ae60;
+            color: white;
+        }
+        .error {
+            background-color: #e74c3c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                    <li><a href="admin-users.html">User Management</a></li>
+                    <li><a href="admin-courses.html">Course Management</a></li>
+                    <li><a href="admin-reports.html">Reports</a></li>
+                    <li><a href="admin-settings.html">Settings</a></li>
+                    <li><a href="index.html">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Settings</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Settings Form -->
+            <form id="settingsForm">
+                <label for="theme">Select Theme</label>
+                <select id="theme" name="theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+
+                <label for="security">Security Level</label>
+                <select id="security" name="security">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <label for="notifications">Enable Notifications</label>
+                <input type="checkbox" id="notifications" name="notifications">
+
+                <button type="submit">Save Settings</button>
+            </form>
+
+            <!-- Message Box -->
+            <div id="messageBox" class="message"></div>
+        </div>
+    </div>
+
+    <script>
+        // Logout function
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+
+        // Handle form submission
+        document.getElementById('settingsForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const theme = document.getElementById('theme').value;
+            const security = document.getElementById('security').value;
+
+            const messageBox = document.getElementById('messageBox');
+
+            if (theme && security) {
+                // Show success message
+                messageBox.textContent = "Settings saved successfully!";
+                messageBox.className = "message success";
+                messageBox.style.display = "block";
+            } else {
+                // Show error message if required fields are missing
+                messageBox.textContent = "Error: Please complete all required fields.";
+                messageBox.className = "message error";
+                messageBox.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

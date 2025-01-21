@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Teacher Dashboard</title>
+  
+  <style>
+    /* General styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #7bb6b2, #8684ae);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1200px;
+      width: 100%;
+      margin: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* Left side: Features */
+    .features {
+      flex: 1;
+      background: linear-gradient(135deg, #7bb6b2, #8684ae);
+      color: white;
+      padding: 30px;
+      animation: slideInLeft 1s ease-out;
+    }
+
+    .features h2 {
+      margin-bottom: 20px;
+    }
+
+    .features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features ul li {
+      margin-bottom: 15px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    .features ul li span {
+      margin-right: 10px;
+      font-size: 20px;
+    }
+
+    /* Right side: Signup form */
+    .signup-container {
+      flex: 1;
+      padding: 30px;
+      animation: slideInRight 1s ease-out;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Animations */
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Side: Features -->
+    <div class="features">
+      <h2>Why Join the Teacher Dashboard?</h2>
+      <ul>
+        <li><span>✅</span> Efficient class management tools.</li>
+        <li><span>✅</span> Simplified assignment distribution and grading.</li>
+        <li><span>✅</span> Real-time progress tracking for your students.</li>
+        <li><span>✅</span> Tools to design and share interactive content.</li>
+        <li><span>✅</span> Comprehensive reporting and analytics.</li>
+        <li><span>✅</span> Opportunities to collaborate with other educators.</li>
+        <li><span>✅</span> User-friendly platform designed for your convenience.</li>
+      </ul>
+    </div>
+
+    <!-- Right Side: Signup Form -->
+    <div class="signup-container">
+      <h1>Create Your Teacher Account</h1>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="mobile">Mobile Number:</label>
+          <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject Specialty:</label>
+          <input type="text" id="subject" name="subject" placeholder="Enter your subject specialty" required>
+        </div>
+        <div class="form-group">
+          <label for="qualification">Qualification:</label>
+          <input type="text" id="qualification" name="qualification" placeholder="Enter your highest qualification" required>
+        </div>
+        <div class="form-group">
+          <label for="experience">Teaching Experience (Years):</label>
+          <input type="number" id="experience" name="experience" placeholder="Enter your teaching experience" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+          </div>
+        <button type="submit" id="signup-button">Sign Up</button>
+      </form>
+      <div class="extra-links">
+        <p>Already have an account? <a href="teacher-login.html">Login here</a>.</p>
+        <p>Back to Home Page? <a href="index.html">Click here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Form Validation and Submission
+    document.getElementById("signup-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get user input values
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+      const mobile = document.getElementById("mobile").value;
+      const subject = document.getElementById("subject").value;
+      const qualification = document.getElementById("qualification").value;
+      const experience = document.getElementById("experience").value;
+
+      // Basic Validation
+      if (name === "" || email === "" || password === "" || confirmPassword === "" || mobile === "" || subject === "" || qualification === "" || experience === "") {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      // Redirect after signup (replace with actual signup logic)
+      alert("Signup successful! Redirecting to dashboard...");
+      window.location.href = "teacher-dashboard.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignments</title>
+  <link rel="stylesheet" href="student-dash-common.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="navbar">
+      <h1>Assignments</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="sidebar">
+        <a href="student-DashBoard.html">Dashboard HOME</a>
+        <a href="student-dash-profile.html">Profile</a>
+        <a href="student-dash-dashboard.html">Dashboard</a>
+        <a href="student-dash-courses.html">Courses</a>
+        <a href="student-dash-assignments.html">Assignments</a>
+        <a href="student-dash-grades.html">Grades</a>
+        <a href="student-dash-notifications.html">Notifications</a>
+        <a href="student-dash-support.html">Support</a>
+      </div>
+      
+
+    <div class="main-content">
+      <h1>Upcoming Assignments</h1>
+      <ul>
+        <li>Assignment 1: Due 2025-01-25</li>
+        <li>Assignment 2: Due 2025-02-01</li>
+        <li>Assignment 3: Due 2025-02-10</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "student-login.html";
+    }
+  </script>
+</body>
+</html>

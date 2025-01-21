@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+        }
+        .container {
+            display: flex;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #34495e;
+            padding: 20px;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 15px 0;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+
+        /* Report Cards */
+        .report-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            width: 22%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+
+        /* Action Buttons */
+        .view-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .view-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                    <li><a href="admin-users.html">User Management</a></li>
+                    <li><a href="admin-courses.html">Course Management</a></li>
+                    <li><a href="admin-reports.html">Reports</a></li>
+                    <li><a href="admin-settings.html">Settings</a></li>
+                    <li><a href="index.html">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1>Reports</h1>
+                <button class="logout-button" onclick="logout()">Log Out</button>
+            </header>
+
+            <!-- Report Cards -->
+            <div class="report-cards">
+                <div class="card">
+                    <h2>User Activity</h2>
+                    <p>View user activity statistics.</p>
+                    <button class="view-button">View Activity</button>
+                </div>
+                <div class="card">
+                    <h2>System Performance</h2>
+                    <p>Monitor system performance and uptime.</p>
+                    <button class="view-button">View Report</button>
+                </div>
+                <div class="card">
+                    <h2>Course Performance</h2>
+                    <p>Track performance across various courses.</p>
+                    <button class="view-button">View Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>
