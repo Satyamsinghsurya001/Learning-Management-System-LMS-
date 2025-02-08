@@ -10,7 +10,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f0f5;
+      background: linear-gradient(135deg, #7bb6b2, #8684ae);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -19,6 +19,7 @@
 
     .container {
       display: flex;
+      flex-wrap: wrap;
       max-width: 1200px;
       width: 100%;
       margin: 20px;
@@ -31,26 +32,27 @@
     /* Left Side: Welcome Section */
     .welcome {
       flex: 1;
-      background-color: #4CAF50;
+      background: linear-gradient(135deg, #4CAF50, #3a9543);
       color: white;
       padding: 30px;
       text-align: center;
       animation: slideInLeft 1s ease-out;
+      min-width: 300px;
     }
 
     .welcome h2 {
-      font-size: 32px;
+      font-size: 28px;
       margin-bottom: 20px;
     }
 
     .welcome p {
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.6;
       margin-bottom: 20px;
     }
 
     .welcome ul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
       margin: 0;
       text-align: left;
@@ -59,16 +61,13 @@
     .welcome ul li {
       font-size: 16px;
       margin: 10px 0;
-      position: relative;
-      padding-left: 25px;
+      display: flex;
+      align-items: center;
     }
 
     .welcome ul li:before {
       content: "✔️";
-      position: absolute;
-      left: 0;
-      font-size: 18px;
-      color: #fff;
+      margin-right: 10px;
     }
 
     /* Right Side: Sign-Up Form */
@@ -76,10 +75,12 @@
       flex: 1.5;
       padding: 30px;
       animation: slideInRight 1s ease-out;
+      min-width: 300px;
     }
 
     .signup-container h1 {
       margin-bottom: 20px;
+      font-size: 24px;
     }
 
     .form-group {
@@ -92,11 +93,13 @@
       font-weight: bold;
     }
 
-    .form-group input, .form-group select {
+    .form-group input, 
+    .form-group select {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
+      font-size: 16px;
     }
 
     button {
@@ -107,6 +110,7 @@
       border-radius: 5px;
       cursor: pointer;
       width: 100%;
+      font-size: 16px;
     }
 
     button:hover {
@@ -125,6 +129,46 @@
 
     .extra-links a:hover {
       text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        box-shadow: none;
+      }
+
+      .welcome,
+      .signup-container {
+        width: 100%;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .welcome h2 {
+        font-size: 22px;
+      }
+
+      .welcome p,
+      .welcome ul li {
+        font-size: 14px;
+      }
+
+      .signup-container h1 {
+        font-size: 20px;
+      }
+
+      .form-group input,
+      .form-group select {
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
     }
 
     /* Animations */
@@ -163,7 +207,7 @@
         <li>👩‍💻 Collaborate with peers and instructors seamlessly.</li>
         <li>🎓 Enhance your resume with certifications and mock tests.</li>
       </ul>
-      <p><strong>Sign up now in less than 2 minutes and unlock a world of knowledge!</strong></p>
+      <p><strong>Sign up now and unlock a world of knowledge!</strong></p>
     </div>
 
     <!-- Right Side: Sign-Up Form -->
