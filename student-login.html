@@ -20,6 +20,7 @@
 
     .container {
       display: flex;
+      flex-wrap: wrap;
       max-width: 1200px;
       width: 100%;
       margin: 20px;
@@ -35,7 +36,7 @@
       background: linear-gradient(135deg, #7bb6b2, #8684ae);
       color: white;
       padding: 30px;
-      animation: slideInLeft 1s ease-out;
+      min-width: 300px;
     }
 
     .advantages h2 {
@@ -63,7 +64,7 @@
     .login-container {
       flex: 1;
       padding: 30px;
-      animation: slideInRight 1s ease-out;
+      min-width: 300px;
     }
 
     .form-group {
@@ -99,26 +100,53 @@
       background-color: #45a049;
     }
 
-    /* Animations */
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50%);
+    .extra-links p {
+      margin: 10px 0;
+    }
+
+    .extra-links a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        box-shadow: none;
       }
-      to {
-        opacity: 1;
-        transform: translateX(0);
+
+      .advantages, .login-container {
+        flex: none;
+        width: 100%;
+        padding: 20px;
       }
     }
 
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(50%);
+    @media (max-width: 480px) {
+      .advantages h2 {
+        font-size: 20px;
       }
-      to {
-        opacity: 1;
-        transform: translateX(0);
+
+      .advantages ul li {
+        font-size: 16px;
+      }
+
+      .form-group input {
+        padding: 8px;
+      }
+
+      button {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .extra-links p {
+        font-size: 14px;
       }
     }
   </style>
@@ -135,8 +163,8 @@
         <li><span>✅</span> Collaborate with peers and instructors.</li>
         <li><span>✅</span> Personalized learning experience.</li>
         <li><span>✅</span> <h4>Default login to view Dashboard use</h4></li>
-        <li><span>✅</span>     #Email = satyam@gmail.com</li>
-        <li><span>✅</span>     #Password = satyam123</li>
+        <li><span>✅</span> #Email = satyam@gmail.com</li>
+        <li><span>✅</span> #Password = satyam123</li>
       </ul>
     </div>
 
@@ -158,13 +186,12 @@
       <div class="extra-links">
         <p>Forget password? <a href="forget-password.html">Click here</a></p>
         <p>Don't have an account? <a href="student-signup.html">Sign Up here</a>.</p>
-        <p>Back to Home Page ? <a href="index.html">click here</a></p>
+        <p>Back to Home Page? <a href="index.html">Click here</a></p>
       </div>
     </div>
   </div>
 
   <script>
-
     // Password visibility toggle functionality
     const passwordInput = document.getElementById("password");
     const togglePassword = document.getElementById("toggle-password");
